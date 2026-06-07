@@ -8,52 +8,48 @@
         /* Reset & Global */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        /* Ẩn citation để slide không bị rác chữ khi trình chiếu */
+        /* Ẩn citation */
         .cite { display: none; }
 
         body {
             background-color: #0a192f;
             color: #ffffff;
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
+            line-height: 1.6;
+            padding: 40px 20px; /* Tạo khoảng cách 2 bên và trên dưới cho nền web */
         }
 
-        /* Slide Container */
-        .slide-container {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            scroll-snap-align: start;
-            padding: 20px;
-        }
-
-        .slide {
-            width: 100%;
+        /* Khung hiển thị chính (Gom tất cả vào 1 khung) */
+        .web-container {
             max-width: 1100px;
-            aspect-ratio: 16 / 9;
+            margin: 0 auto;
             background-color: #0f2547;
-            padding: 50px;
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
+            padding: 60px 80px; /* Padding tổng thể cho nội dung bên trong */
         }
 
-        h1, h2, h3 { color: #d4af37; margin-bottom: 15px; }
-        h2 { border-left: 5px solid #d4af37; padding-left: 15px; margin-bottom: 30px; }
-        p { line-height: 1.6; margin-bottom: 10px; font-size: 1.1em; }
+        /* Các phân đoạn (section) bên trong khung */
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Đường gạch mờ ngăn cách nhẹ nhàng */
+        }
+        
+        /* Bỏ đường gạch ở section cuối */
+        .section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        /* Tiêu đề */
+        h1, h2, h3 { color: #d4af37; margin-bottom: 20px; }
+        h2 { border-left: 5px solid #d4af37; padding-left: 15px; margin-bottom: 35px; font-size: 1.8em; }
+        p { margin-bottom: 10px; font-size: 1.1em; }
 
         /* Bảng biểu chung */
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: rgba(255, 255, 255, 0.03); }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-size: 1.1em; }
-        th { background-color: rgba(212, 175, 55, 0.15); color: #d4af37; }
-
-        /* Bảng Tài Chính đặc biệt (giống ảnh mẫu) */
+        
+        /* Bảng Tài Chính & Cấu trúc phát hành (giữ nguyên style cũ) */
         .finance-table {
             background-color: transparent;
             border-radius: 6px;
@@ -61,7 +57,7 @@
             border: none;
         }
         .finance-table th {
-            background-color: #dcb347; /* Màu vàng giống ảnh */
+            background-color: #dcb347;
             color: #000000;
             font-weight: 800;
             border: none;
@@ -71,20 +67,16 @@
             font-weight: 700;
             border: none;
         }
-        .finance-table tbody tr:nth-child(odd) {
-            background-color: #f2f4f8; /* Màu trắng xám */
-        }
-        .finance-table tbody tr:nth-child(even) {
-            background-color: #e1e4ed; /* Màu xanh xám nhạt */
-        }
+        .finance-table tbody tr:nth-child(odd) { background-color: #f2f4f8; }
+        .finance-table tbody tr:nth-child(even) { background-color: #e1e4ed; }
         
         /* Layout chia cột */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
 
         /* Card / Box style */
-        .box { background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 8px; border-top: 3px solid #d4af37; }
+        .box { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 8px; border-top: 3px solid #d4af37; }
         .box-title { font-weight: bold; color: #d4af37; margin-bottom: 10px; font-size: 1.2em; }
         
         /* Team roles */
@@ -92,157 +84,164 @@
 
         /* Highlight text */
         .highlight { color: #d4af37; font-weight: bold; }
+        
+        /* Căn chỉnh ảnh */
+        .img-container {
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; 
+            border-radius: 10px; 
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+        }
+        .img-container img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            max-height: 450px; 
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="slide-container">
-        <div class="slide" style="text-align: center; align-items: center;">
-            <h3>INVESTMENT BANKING ADVISORY<span class="cite"></span></h3>
-            <h1 style="font-size: 3em; margin: 20px 0;">Tư vấn Huy động vốn Chiến lược<br>Công ty CP PNJ (2026)<span class="cite"></span></h1>
-            <p style="font-size: 1.5em; color: #a8b2d1;">Phát hành Cổ phiếu Riêng lẻ: Đột phá Vốn & Công nghệ<span class="cite"></span></p>
-            <div style="margin-top: 40px;">
-                <span style="background: #d4af37; color: #0a192f; padding: 8px 20px; border-radius: 20px; font-weight: bold;">NHÓM CHUYÊN GIA TƯ VẤN ĐỘC LẬP<span class="cite"></span></span>
-                <span style="background: #e74c3c; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; margin-left: 10px;">Confidential & Proprietary<span class="cite"></span></span>
-            </div>
-        </div>
-    </div>
+    <div class="web-container">
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Đội ngũ Chuyên gia Tư vấn<span class="cite"></span></h2>
+        <section class="section" style="text-align: center; padding-top: 20px;">
+            <h3>INVESTMENT BANKING ADVISORY</h3>
+            <h1 style="font-size: 3em; margin: 20px 0;">Tư vấn Huy động vốn Chiến lược<br>Công ty CP PNJ (2026)</h1>
+            <p style="font-size: 1.5em; color: #a8b2d1;">Phát hành Cổ phiếu Riêng lẻ: Đột phá Vốn & Công nghệ</p>
+            <div style="margin-top: 40px;">
+                <span style="background: #d4af37; color: #0a192f; padding: 8px 20px; border-radius: 20px; font-weight: bold;">NHÓM CHUYÊN GIA TƯ VẤN ĐỘC LẬP</span>
+                <span style="background: #e74c3c; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; margin-left: 10px;">Confidential & Proprietary</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Đội ngũ Chuyên gia Tư vấn</h2>
             <div class="grid-5">
                 <div class="box">
-                    <div class="box-title">Uyên Thi<span class="cite"></span></div>
+                    <div class="box-title">Uyên Thi</div>
                     <div class="role">Senior Research Analyst</div>
-                    <p style="font-size: 0.9em;">Phân tích tổng quan doanh nghiệp và bối cảnh ngành trang sức.<span class="cite"></span></p>
+                    <p style="font-size: 0.9em;">Phân tích tổng quan doanh nghiệp và bối cảnh ngành trang sức.</p>
                 </div>
                 <div class="box">
-                    <div class="box-title">Hồng Ngân<span class="cite"></span></div>
-                    <div class="role">Senior Financial Modeler<span class="cite"></span></div>
-                    <p style="font-size: 0.9em;">Đánh giá sức khỏe tài chính và mô hình hóa nhu cầu vốn.<span class="cite"></span></p>
+                    <div class="box-title">Hồng Ngân</div>
+                    <div class="role">Senior Financial Modeler</div>
+                    <p style="font-size: 0.9em;">Đánh giá sức khỏe tài chính và mô hình hóa nhu cầu vốn.</p>
                 </div>
                 <div class="box">
-                    <div class="box-title">Xuân Phương<span class="cite"></span></div>
-                    <div class="role">Head of ECM<span class="cite"></span></div>
-                    <p style="font-size: 0.9em;">Thiết kế cấu trúc phát hành và quy trình huy động vốn cổ phần.<span class="cite"></span></p>
+                    <div class="box-title">Xuân Phương</div>
+                    <div class="role">Head of ECM</div>
+                    <p style="font-size: 0.9em;">Thiết kế cấu trúc phát hành và quy trình huy động vốn cổ phần.</p>
                 </div>
                 <div class="box">
-                    <div class="box-title">Quỳnh Trân<span class="cite"></span></div>
-                    <div class="role">Strategic Advisor<span class="cite"></span></div>
-                    <p style="font-size: 0.9em;">Khai thác giá trị cộng hưởng từ các đối tác chiến lược Masan & FPT.<span class="cite"></span></p>
+                    <div class="box-title">Quỳnh Trân</div>
+                    <div class="role">Strategic Advisor</div>
+                    <p style="font-size: 0.9em;">Khai thác giá trị cộng hưởng từ các đối tác chiến lược Masan & FPT.</p>
                 </div>
                 <div class="box">
-                    <div class="box-title">Quốc Vương<span class="cite"></span></div>
-                    <div class="role">Managing Director<span class="cite"></span></div>
-                    <p style="font-size: 0.9em;">Tổng hợp luận điểm chiến lược và đưa ra quyết định cuối cùng.<span class="cite"></span></p>
+                    <div class="box-title">Quốc Vương</div>
+                    <div class="role">Managing Director</div>
+                    <p style="font-size: 0.9em;">Tổng hợp luận điểm chiến lược và đưa ra quyết định cuối cùng.</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Vị thế dẫn đầu ngành Bán lẻ Trang sức<span class="cite"></span></h2>
+        <section class="section">
+            <h2>Vị thế dẫn đầu ngành Bán lẻ Trang sức</h2>
             <div class="grid-2">
                 <div>
-                    <h3 style="color: #ffffff;">Uy tín & Quy mô (2025)<span class="cite"></span></h3>
+                    <h3 style="color: #ffffff;">Uy tín & Quy mô (2025)</h3>
                     <ul style="list-style-type: square; margin-left: 20px; font-size: 1.1em; line-height: 1.8;">
-                        <li><span class="highlight">Mạng lưới:</span> 431 cửa hàng trên 31/34 tỉnh thành.<span class="cite"></span></li>
-                        <li><span class="highlight">Thị phần:</span> Chiếm ưu thế tuyệt đối trong phân khúc trang sức có thương hiệu.<span class="cite"></span></li>
-                        <li><span class="highlight">Doanh thu (2025):</span> 34,976 tỷ đồng (~1.3 tỷ USD).<span class="cite"></span></li>
-                        <li><span class="highlight">Lợi nhuận ròng:</span> 2,829 tỷ đồng (Tăng trưởng 33.9% YoY).<span class="cite"></span></li>
-                        <li><span class="highlight">Chiến lược:</span> Chuyển dịch mạnh mẽ sang bán lẻ hiện đại và trải nghiệm khách hàng.<span class="cite"></span></li>
+                        <li><span class="highlight">Mạng lưới:</span> 431 cửa hàng trên 31/34 tỉnh thành.</li>
+                        <li><span class="highlight">Thị phần:</span> Chiếm ưu thế tuyệt đối trong phân khúc trang sức có thương hiệu.</li>
+                        <li><span class="highlight">Doanh thu (2025):</span> 34,976 tỷ đồng (~1.3 tỷ USD).</li>
+                        <li><span class="highlight">Lợi nhuận ròng:</span> 2,829 tỷ đồng (Tăng trưởng 33.9% YoY).</li>
+                        <li><span class="highlight">Chiến lược:</span> Chuyển dịch mạnh mẽ sang bán lẻ hiện đại và trải nghiệm khách hàng.</li>
                     </ul>
                 </div>
-                <div style="display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 10px; background: rgba(0,0,0,0.2);">
-                    <img src="image_821c17.jpg" alt="Bộ trang sức Giọt Thời Gian - PNJ" style="width: 100%; height: 100%; object-fit: contain; max-height: 400px; border-radius: 10px;">
+                <div class="img-container">
+                    <img src="image_821c17.jpg" alt="Bộ trang sức Giọt Thời Gian - PNJ">
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Phân tích Sức khỏe Tài chính (2023 - 2025)<span class="cite"></span></h2>
+        <section class="section">
+            <h2>Phân tích Sức khỏe Tài chính (2023 - 2025)</h2>
             <table class="finance-table">
                 <thead>
                     <tr>
-                        <th>Chỉ số tài chính (Hợp nhất)<span class="cite"></span></th>
-                        <th>2023<span class="cite"></span></th>
-                        <th>2024<span class="cite"></span></th>
-                        <th>2025<span class="cite"></span></th>
+                        <th>Chỉ số tài chính (Hợp nhất)</th>
+                        <th>2023</th>
+                        <th>2024</th>
+                        <th>2025</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Doanh thu thuần (Tỷ VNĐ)<span class="cite"></span></td><td>33,136<span class="cite"></span></td><td>37,822<span class="cite"></span></td><td>34,976<span class="cite"></span></td></tr>
-                    <tr><td>Biên lợi nhuận gộp (%)<span class="cite"></span></td><td>18.28%<span class="cite"></span></td><td>17.64%<span class="cite"></span></td><td>21.97%<span class="cite"></span></td></tr>
-                    <tr><td>ROE (%)<span class="cite"></span></td><td>21.60%<span class="cite"></span></td><td>20.06%<span class="cite"></span></td><td>23.06%<span class="cite"></span></td></tr>
-                    <tr><td>Tỷ lệ Nợ vay / VCSH<span class="cite"></span></td><td>0.24<span class="cite"></span></td><td>0.30<span class="cite"></span></td><td>0.32<span class="cite"></span></td></tr>
-                    <tr><td>Hàng tồn kho (Vòng quay)<span class="cite"></span></td><td>2.53<span class="cite"></span></td><td>2.60<span class="cite"></span></td><td>1.89<span class="cite"></span></td></tr>
+                    <tr><td>Doanh thu thuần (Tỷ VNĐ)</td><td>33,136</td><td>37,822</td><td>34,976</td></tr>
+                    <tr><td>Biên lợi nhuận gộp (%)</td><td>18.28%</td><td>17.64%</td><td>21.97%</td></tr>
+                    <tr><td>ROE (%)</td><td>21.60%</td><td>20.06%</td><td>23.06%</td></tr>
+                    <tr><td>Tỷ lệ Nợ vay / VCSH</td><td>0.24</td><td>0.30</td><td>0.32</td></tr>
+                    <tr><td>Hàng tồn kho (Vòng quay)</td><td>2.53</td><td>2.60</td><td>1.89</td></tr>
                 </tbody>
             </table>
             <div style="margin-top: 25px;">
                 <p style="color: #dcb347; font-weight: bold; font-size: 1.1em; line-height: 1.5;">
-                    ⚠️ Nhận định: Áp lực vốn lưu động gia tăng khi vòng quay tồn kho chậm lại (1.89 vòng). Cần nguồn vốn dài hạn để thay thế nợ ngắn hạn.<span class="cite"></span>
+                    ⚠️ Nhận định: Áp lực vốn lưu động gia tăng khi vòng quay tồn kho chậm lại (1.89 vòng). Cần nguồn vốn dài hạn để thay thế nợ ngắn hạn.
                 </p>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Nhu cầu Huy động Vốn: 3 Trụ cột Chiến lược<span class="cite"></span></h2>
-            <div class="grid-3" style="margin-top: 30px;">
+        <section class="section">
+            <h2>Nhu cầu Huy động Vốn: 3 Trụ cột Chiến lược</h2>
+            <div class="grid-3">
                 <div class="box">
                     <h3 style="text-align: center;">Mở rộng Hệ thống</h3>
-                    <p>Tập trung đô thị loại 2 & 3. Dự kiến mở mới 40-45 cửa hàng/năm.<span class="cite"></span></p>
-                    <p class="highlight" style="font-size: 1.2em; text-align: center; margin-top: 20px;">Nhu cầu: 800 tỷ VNĐ<span class="cite"></span></p>
+                    <p>Tập trung đô thị loại 2 & 3. Dự kiến mở mới 40-45 cửa hàng/năm.</p>
+                    <p class="highlight" style="font-size: 1.2em; text-align: center; margin-top: 20px;">Nhu cầu: 800 tỷ VNĐ</p>
                 </div>
                 <div class="box">
-                    <h3 style="text-align: center;">Chuyển đổi Số<span class="cite"></span></h3>
-                    <p>Nâng cấp ERP, CRM và AI để tối ưu hóa tiếp thị cá nhân hóa.<span class="cite"></span></p>
-                    <p class="highlight" style="font-size: 1.2em; text-align: center; margin-top: 20px;">Nhu cầu: 388.8 tỷ VNĐ<span class="cite"></span></p>
+                    <h3 style="text-align: center;">Chuyển đổi Số</h3>
+                    <p>Nâng cấp ERP, CRM và AI để tối ưu hóa tiếp thị cá nhân hóa.</p>
+                    <p class="highlight" style="font-size: 1.2em; text-align: center; margin-top: 20px;">Nhu cầu: 388.8 tỷ VNĐ</p>
                 </div>
                 <div class="box">
-                    <h3 style="text-align: center;">Năng lực Sản xuất<span class="cite"></span></h3>
-                    <p>Mở rộng nhà máy Long An và tự động hóa dây chuyền.<span class="cite"></span></p>
-                    <p class="highlight" style="font-size: 1.2em; text-align: center; margin-top: 20px;">Nhu cầu: 400 tỷ VNĐ<span class="cite"></span></p>
+                    <h3 style="text-align: center;">Năng lực Sản xuất</h3>
+                    <p>Mở rộng nhà máy Long An và tự động hóa dây chuyền.</p>
+                    <p class="highlight" style="font-size: 1.2em; text-align: center; margin-top: 20px;">Nhu cầu: 400 tỷ VNĐ</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Tại sao chọn Phát hành Riêng lẻ (Private Placement)?<span class="cite"></span></h2>
-            <div class="grid-2">
+        <section class="section">
+            <h2>Tại sao chọn Phát hành Riêng lẻ (Private Placement)?</h2>
+            <div class="grid-2" style="align-items: start;">
                 <div>
-                    <h3 style="color: #4CAF50;">Ưu điểm vượt trội<span class="cite"></span></h3>
+                    <h3 style="color: #4CAF50;">Ưu điểm vượt trội</h3>
                     <ul style="list-style-type: none; font-size: 1.1em; line-height: 1.8;">
-                        <li>✔️ Không áp lực trả lãi cố định (so với Trái phiếu).<span class="cite"></span></li>
-                        <li>✔️ Thu hút "Smart Money" - Đối tác chiến lược hỗ trợ quản trị.<span class="cite"></span></li>
-                        <li>✔️ Quy trình linh hoạt, nhanh chóng hơn IPO.<span class="cite"></span></li>
-                        <li>✔️ Cố định cổ đông chất lượng cao, hạn chế pha loãng đại trà.<span class="cite"></span></li>
+                        <li>✔️ Không áp lực trả lãi cố định (so với Trái phiếu).</li>
+                        <li>✔️ Thu hút "Smart Money" - Đối tác chiến lược hỗ trợ quản trị.</li>
+                        <li>✔️ Quy trình linh hoạt, nhanh chóng hơn IPO.</li>
+                        <li>✔️ Cố định cổ đông chất lượng cao, hạn chế pha loãng đại trà.</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 style="color: #e74c3c;">So sánh các phương án khác<span class="cite"></span></h3>
+                    <h3 style="color: #e74c3c;">So sánh các phương án khác</h3>
                     <ul style="list-style-type: none; font-size: 1.1em; line-height: 1.8;">
-                        <li>❌ <strong>Vay ngân hàng:</strong> Gánh nặng chi phí tài chính cao.<span class="cite"></span></li>
-                        <li>❌ <strong>Trái phiếu riêng lẻ:</strong> Áp lực dòng tiền trả nợ gốc/lãi.<span class="cite"></span></li>
-                        <li>❌ <strong>IPO:</strong> Tốn kém thời gian, chi phí và yêu cầu tuân thủ phức tạp.<span class="cite"></span></li>
-                        <li>❌ <strong>Quỹ đầu tư:</strong> Thường có khẩu vị thoái vốn sớm (3-5 năm).<span class="cite"></span></li>
+                        <li>❌ <strong>Vay ngân hàng:</strong> Gánh nặng chi phí tài chính cao.</li>
+                        <li>❌ <strong>Trái phiếu riêng lẻ:</strong> Áp lực dòng tiền trả nợ gốc/lãi.</li>
+                        <li>❌ <strong>IPO:</strong> Tốn kém thời gian, chi phí và yêu cầu tuân thủ phức tạp.</li>
+                        <li>❌ <strong>Quỹ đầu tư:</strong> Thường có khẩu vị thoái vốn sớm (3-5 năm).</li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Đề xuất Cấu trúc Phát hành (Kịch bản 5%)<span class="cite"></span></h2>
-            <table class="finance-table" style="margin-top: 20px;">
+        <section class="section">
+            <h2>Đề xuất Cấu trúc Phát hành (Kịch bản 5%)</h2>
+            <table class="finance-table">
                 <thead>
                     <tr>
                         <th style="color: #ff0000; width: 30%;">Thông số phát hành</th>
@@ -278,79 +277,65 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Giá trị Cộng hưởng từ Masan & FPT<span class="cite"></span></h2>
-            <div class="grid-2">
+        <section class="section">
+            <h2>Giá trị Cộng hưởng từ Masan & FPT</h2>
+            <div class="grid-2" style="align-items: stretch;">
                 <div class="box">
-                    <h3 style="color: #ff5722; font-size: 1.5em;">Masan Group<span class="cite"></span></h3>
-                    <p><strong>Hệ sinh thái Bán lẻ & Dữ liệu:</strong> Tiếp cận hàng chục triệu khách hàng WinCommerce.<span class="cite"></span></p>
-                    <p>Bán chéo trang sức quà tặng cao cấp qua hệ thống WIN.<span class="cite"></span></p>
+                    <h3 style="color: #ff5722; font-size: 1.5em;">Masan Group</h3>
+                    <p><strong>Hệ sinh thái Bán lẻ & Dữ liệu:</strong> Tiếp cận hàng chục triệu khách hàng WinCommerce.</p>
+                    <p>Bán chéo trang sức quà tặng cao cấp qua hệ thống WIN.</p>
                 </div>
                 <div class="box">
-                    <h3 style="color: #03a9f4; font-size: 1.5em;">FPT Corporation<span class="cite"></span></h3>
-                    <p><strong>Công nghệ & Chuyển đổi số:</strong> Tối ưu hóa chuỗi cung ứng bằng AI.<span class="cite"></span></p>
-                    <p>Nâng cấp trải nghiệm mua sắm đa kênh (Omni-channel) và hệ thống bảo mật dữ liệu.<span class="cite"></span></p>
+                    <h3 style="color: #03a9f4; font-size: 1.5em;">FPT Corporation</h3>
+                    <p><strong>Công nghệ & Chuyển đổi số:</strong> Tối ưu hóa chuỗi cung ứng bằng AI.</p>
+                    <p>Nâng cấp trải nghiệm mua sắm đa kênh (Omni-channel) và hệ thống bảo mật dữ liệu.</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Đánh giá Tác động đến EPS (Giả định 2026)<span class="cite"></span></h2>
+        <section class="section">
+            <h2>Đánh giá Tác động đến EPS (Giả định 2026)</h2>
             <div class="grid-2" style="text-align: center; margin-bottom: 30px;">
                 <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 10px;">
-                    <h3 style="color: #a8b2d1;">EPS khi chưa phát hành<span class="cite"></span></h3>
-                    <p style="font-size: 2em; font-weight: bold; color: white;">9,716 VND<span class="cite"></span></p>
+                    <h3 style="color: #a8b2d1;">EPS khi chưa phát hành</h3>
+                    <p style="font-size: 2em; font-weight: bold; color: white;">9,716 VND</p>
                 </div>
                 <div style="background: rgba(212, 175, 55, 0.15); border: 2px solid #d4af37; padding: 30px; border-radius: 10px;">
-                    <h3 style="color: #d4af37;">EPS sau phát hành 5%<span class="cite"></span></h3>
-                    <p style="font-size: 2em; font-weight: bold; color: #d4af37;">9,253 VND<span class="cite"></span></p>
+                    <h3 style="color: #d4af37;">EPS sau phát hành 5%</h3>
+                    <p style="font-size: 2em; font-weight: bold; color: #d4af37;">9,253 VND</p>
                 </div>
             </div>
             <div class="box" style="text-align: center;">
-                <p style="color: #a8b2d1; font-size: 0.9em;">Phân tích Định lượng<span class="cite"></span></p>
+                <p style="color: #a8b2d1; font-size: 0.9em;">Phân tích Định lượng</p>
                 <p style="font-size: 1.2em; margin: 15px 0;">
-                    <i>EPS<sub>mới</sub></i> = 3,250,000,000,000 / (334,500,000 + 16,725,000) &approx; 9,253 VND/CP<span class="cite"></span>
+                    <i>EPS<sub>mới</sub></i> = 3,250,000,000,000 / (334,500,000 + 16,725,000) &approx; 9,253 VND/CP
                 </p>
                 <p style="color: #4CAF50; font-weight: bold;">
-                    Pha loãng kỹ thuật: 4.76%. Tuy nhiên, việc tiết kiệm ~90 tỷ lãi vay và tăng trưởng từ đối tác chiến lược sẽ bù đắp hoàn toàn trong 12-18 tháng.<span class="cite"></span>
+                    Pha loãng kỹ thuật: 4.76%. Tuy nhiên, việc tiết kiệm ~90 tỷ lãi vay và tăng trưởng từ đối tác chiến lược sẽ bù đắp hoàn toàn trong 12-18 tháng.
                 </p>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="slide-container">
-        <div class="slide">
-            <h2>Khuyến nghị Cuối cùng & Kết luận<span class="cite"></span></h2>
-            <div class="grid-2">
+        <section class="section">
+            <h2>Khuyến nghị Cuối cùng & Kết luận</h2>
+            <div class="grid-2" style="align-items: start;">
                 <div>
-                    <h3>Lộ trình triển khai<span class="cite"></span></h3>
+                    <h3>Lộ trình triển khai</h3>
                     <ol style="margin-left: 20px; font-size: 1.1em; line-height: 1.8;">
-                        <li>Trình ĐHĐCĐ thông qua phương án (Q3/2026).<span class="cite"></span></li>
-                        <li>Đàm phán chi tiết với Masan & FPT (Q4/2026).<span class="cite"></span></li>
-                        <li>Hoàn tất hồ sơ gửi UBCKNN & Chào bán.<span class="cite"></span></li>
-                        <li>Giải ngân vốn vào Hệ thống & Công nghệ (2027).<span class="cite"></span></li>
+                        <li>Trình ĐHĐCĐ thông qua phương án (Q3/2026).</li>
+                        <li>Đàm phán chi tiết với Masan & FPT (Q4/2026).</li>
+                        <li>Hoàn tất hồ sơ gửi UBCKNN & Chào bán.</li>
+                        <li>Giải ngân vốn vào Hệ thống & Công nghệ (2027).</li>
                     </ol>
                 </div>
                 <div style="background: rgba(212, 175, 55, 0.1); padding: 30px; border-radius: 10px; border-left: 5px solid #d4af37;">
                     <p style="font-size: 1.2em; font-style: italic; line-height: 1.6;">
-                        "Phát hành riêng lẻ cho Masan & FPT không chỉ là huy động vốn, mà là bước đi chiến lược biến PNJ từ một nhà chế tác trang sức truyền thống thành một 'Đế chế Bán lẻ Công nghệ' hàng đầu khu vực."<span class="cite"></span>
+                        "Phát hành riêng lẻ cho Masan & FPT không chỉ là huy động vốn, mà là bước đi chiến lược biến PNJ từ một nhà chế tác trang sức truyền thống thành một 'Đế chế Bán lẻ Công nghệ' hàng đầu khu vực."
                     </p>
-                    <p style="text-align: right; margin-top: 15px; font-weight: bold; color: #d4af37;">- Nguyễn Quốc Vương, Managing Director<span class="cite"></span></p>
+                    <p style="text-align: right; margin-top: 15px; font-weight: bold; color: #d4af37;">- Nguyễn Quốc Vương, Managing Director</p>
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 50px;">
-                <h1 style="font-size: 2.5em; letter-spacing: 5px;">QUESTIONS?<span class="cite"></span></h1>
-                <p style="color: #a8b2d1;">Email: advisory-team@hub.edu.vn | Website: pnj.com.vn<span class="cite"></span></p>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
+            <div style="text-align: center; margin-
