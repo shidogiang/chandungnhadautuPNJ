@@ -15,26 +15,24 @@
             background-color: #0a192f;
             color: #ffffff;
             line-height: 1.6;
-            padding: 40px 20px; /* Tạo khoảng cách 2 bên và trên dưới cho nền web */
+            padding: 40px 20px;
         }
 
-        /* Khung hiển thị chính (Gom tất cả vào 1 khung) */
+        /* Khung hiển thị chính */
         .web-container {
             max-width: 1100px;
             margin: 0 auto;
             background-color: #0f2547;
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            padding: 60px 80px; /* Padding tổng thể cho nội dung bên trong */
+            padding: 60px 80px;
         }
 
-        /* Các phân đoạn (section) bên trong khung */
+        /* Các phân đoạn (section) */
         .section {
             padding: 60px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Đường gạch mờ ngăn cách nhẹ nhàng */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
-        /* Bỏ đường gạch ở section cuối */
         .section:last-child {
             border-bottom: none;
             padding-bottom: 0;
@@ -49,24 +47,10 @@
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: rgba(255, 255, 255, 0.03); }
         th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-size: 1.1em; }
         
-        /* Bảng Tài Chính & Cấu trúc phát hành (giữ nguyên style cũ) */
-        .finance-table {
-            background-color: transparent;
-            border-radius: 6px;
-            overflow: hidden;
-            border: none;
-        }
-        .finance-table th {
-            background-color: #dcb347;
-            color: #000000;
-            font-weight: 800;
-            border: none;
-        }
-        .finance-table td {
-            color: #000000;
-            font-weight: 700;
-            border: none;
-        }
+        /* Bảng Tài Chính & Cấu trúc phát hành */
+        .finance-table { background-color: transparent; border-radius: 6px; overflow: hidden; border: none; }
+        .finance-table th { background-color: #dcb347; color: #000000; font-weight: 800; border: none; }
+        .finance-table td { color: #000000; font-weight: 700; border: none; }
         .finance-table tbody tr:nth-child(odd) { background-color: #f2f4f8; }
         .finance-table tbody tr:nth-child(even) { background-color: #e1e4ed; }
         
@@ -78,91 +62,68 @@
         /* Card / Box style */
         .box { background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 8px; border-top: 3px solid #d4af37; }
         .box-title { font-weight: bold; color: #d4af37; margin-bottom: 10px; font-size: 1.2em; }
-        
-        /* Team roles */
         .role { font-style: italic; color: #a8b2d1; font-size: 0.9em; margin-bottom: 10px; }
-
-        /* Highlight text */
         .highlight { color: #d4af37; font-weight: bold; }
         
         /* Căn chỉnh ảnh */
-        /* --- Nút bấm Đội ngũ --- */
-        .team-btn {
-            display: inline-block;
-            background: transparent;
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 15px 40px;
-            font-size: 1.5em;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .img-container { display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 10px; background: rgba(0,0,0,0.2); padding: 10px; }
+        .img-container img { width: 100%; height: 100%; object-fit: contain; max-height: 450px; border-radius: 10px; }
+
+        /* --- Nút bấm & Badge Trang bìa --- */
+        .cover-badges {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
-        .team-btn:hover {
+        .badge-btn {
             background: #d4af37;
             color: #0a192f;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            transform: translateY(-2px);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .badge-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+            background: #e6c249;
+        }
+        .badge-static {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1em;
+            display: inline-flex;
+            align-items: center;
         }
 
         /* --- Popup Modal --- */
         .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(10, 25, 47, 0.85); /* Nền tối mờ */
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(10, 25, 47, 0.85); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease;
         }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-content {
-            background: #0f2547;
-            padding: 50px;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            max-width: 1200px;
-            width: 90%;
-            position: relative;
-            transform: translateY(50px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng nảy nhẹ */
+            background: #0f2547; padding: 50px; border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3); max-width: 1200px; width: 90%;
+            position: relative; transform: translateY(50px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .modal-overlay.active .modal-content {
-            transform: translateY(0);
-        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
         .close-btn {
-            position: absolute;
-            top: 15px; right: 25px;
-            font-size: 2em;
-            color: #a8b2d1;
-            cursor: pointer;
-            transition: color 0.2s;
+            position: absolute; top: 15px; right: 25px; font-size: 2em;
+            color: #a8b2d1; cursor: pointer; transition: color 0.2s;
         }
         .close-btn:hover { color: #e74c3c; }
-        .img-container {
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden; 
-            border-radius: 10px; 
-            background: rgba(0,0,0,0.2);
-            padding: 10px;
-        }
-        .img-container img {
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-            max-height: 450px; 
-            border-radius: 10px;
-        }
     </style>
 </head>
 <body>
@@ -170,20 +131,19 @@
     <div class="web-container">
 
         <section class="section" style="text-align: center; padding-top: 20px;">
-            <h3>INVESTMENT BANKING ADVISORY</h3>
-            <h1 style="font-size: 3em; margin: 20px 0;">Tư vấn Huy động vốn Chiến lược<br>Công ty CP PNJ (2026)</h1>
+            <h3 style="color: #d4af37;">INVESTMENT BANKING ADVISORY</h3>
+            <h1 style="font-size: 3.5em; margin: 20px 0; color: #d4af37;">Tư vấn Huy động vốn Chiến lược<br>Công ty CP PNJ (2026)</h1>
             <p style="font-size: 1.5em; color: #a8b2d1;">Phát hành Cổ phiếu Riêng lẻ: Đột phá Vốn & Công nghệ</p>
-            <div style="margin-top: 40px;">
-                <span style="background: #d4af37; color: #0a192f; padding: 8px 20px; border-radius: 20px; font-weight: bold;">NHÓM CHUYÊN GIA TƯ VẤN ĐỘC LẬP</span>
-                <span style="background: #e74c3c; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; margin-left: 10px;">Confidential & Proprietary</span>
+            
+            <div class="cover-badges">
+                <button class="badge-btn" onclick="openModal()">NHÓM CHUYÊN GIA TƯ VẤN ĐỘC LẬP</button>
+                <span class="badge-static">Confidential & Proprietary</span>
             </div>
-        </section>
-        <section class="section" style="text-align: center;">
-            <button class="team-btn" onclick="openModal()">Đội ngũ Chuyên gia Tư vấn</button>
         </section>
 
         <div class="modal-overlay" id="teamModal" onclick="closeModal(event)">
-            <div class="modal-content" onclick="event.stopPropagation()"> <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
                 <h2 style="margin-top: 0; text-align: center; border: none;">Đội ngũ Chuyên gia Tư vấn</h2>
                 <div class="grid-5" style="margin-top: 30px;">
                     <div class="box">
@@ -214,6 +174,7 @@
                 </div>
             </div>
         </div>
+
         <section class="section">
             <h2>Vị thế dẫn đầu ngành Bán lẻ Trang sức</h2>
             <div class="grid-2">
@@ -410,16 +371,13 @@
         </section>
 
     </div>
-<script>
-        // Hàm mở Modal
+
+    <script>
         function openModal() {
             document.getElementById('teamModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Khóa cuộn trang nền khi mở popup
+            document.body.style.overflow = 'hidden'; // Khóa cuộn trang
         }
-
-        // Hàm đóng Modal
         function closeModal(event) {
-            // Chỉ đóng khi click vào dấu X hoặc click ra vùng nền tối bên ngoài
             if (!event || event.target.id === 'teamModal' || event.target.className === 'close-btn') {
                 document.getElementById('teamModal').classList.remove('active');
                 document.body.style.overflow = 'auto'; // Mở lại cuộn trang
