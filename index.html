@@ -124,6 +124,49 @@
             color: #a8b2d1; cursor: pointer; transition: color 0.2s;
         }
         .close-btn:hover { color: #e74c3c; }
+        /* --- Nút EPS & Bảng Công thức --- */
+        .eps-btn {
+            background: rgba(212, 175, 55, 0.15);
+            border: 2px solid #d4af37;
+            padding: 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .eps-btn:hover {
+            background: rgba(212, 175, 55, 0.3); /* Sáng lên khi hover */
+            transform: translateY(-5px); /* Nảy lên nhẹ */
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        }
+        .eps-btn::after {
+            content: "👆 Click để xem chi tiết";
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: #d4af37;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .eps-btn:hover::after {
+            opacity: 1; /* Hiện chữ hướng dẫn khi hover */
+        }
+        
+        .eps-details {
+            display: none; /* Mặc định ẩn đi */
+            margin-top: 30px;
+        }
+        .eps-details.active {
+            display: block; /* Hiện ra khi có class active */
+            animation: slideDownFade 0.4s ease-out forwards;
+        }
+        
+        @keyframes slideDownFade {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -320,20 +363,23 @@
                 </div>
             </div>
         </section>
-
+<!-- Phần 9: EPS Impact -->
         <section class="section">
             <h2>Đánh giá Tác động đến EPS (Giả định 2026)</h2>
-            <div class="grid-2" style="text-align: center; margin-bottom: 30px;">
+            <div class="grid-2" style="text-align: center;">
                 <div style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 10px;">
                     <h3 style="color: #a8b2d1;">EPS khi chưa phát hành</h3>
                     <p style="font-size: 2em; font-weight: bold; color: white;">9,716 VND</p>
                 </div>
-                <div style="background: rgba(212, 175, 55, 0.15); border: 2px solid #d4af37; padding: 30px; border-radius: 10px;">
+                <!-- Box này đã được nâng cấp thành nút bấm -->
+                <div class="eps-btn" onclick="toggleEps()">
                     <h3 style="color: #d4af37;">EPS sau phát hành 5%</h3>
-                    <p style="font-size: 2em; font-weight: bold; color: #d4af37;">9,253 VND</p>
+                    <p style="font-size: 2em; font-weight: bold; color: #d4af37; margin-bottom: 10px;">9,253 VND</p>
                 </div>
             </div>
-            <div class="box" style="text-align: center;">
+            
+            <!-- Box phân tích bị ẩn mặc định, sẽ hiện khi toggle -->
+            <div id="epsFormulaBox" class="box eps-details" style="text-align: center;">
                 <p style="color: #a8b2d1; font-size: 0.9em;">Phân tích Định lượng</p>
                 <p style="font-size: 1.2em; margin: 15px 0;">
                     <i>EPS<sub>mới</sub></i> = 3,250,000,000,000 / (334,500,000 + 16,725,000) &approx; 9,253 VND/CP
@@ -383,6 +429,14 @@
                 document.body.style.overflow = 'auto'; // Mở lại cuộn trang
             }
         }
+        <!-- Script xử lý Tương tác -->
+    <script>
+        // Hàm Ẩn/Hiện bảng công thức EPS
+        function toggleEps() {
+            var formulaBox = document.getElementById('epsFormulaBox');
+            formulaBox.classList.toggle('active');
+        }
+    </script>
     </script>
 </body>
 </html>
