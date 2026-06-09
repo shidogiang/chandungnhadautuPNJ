@@ -86,6 +86,67 @@
         .highlight { color: #d4af37; font-weight: bold; }
         
         /* Căn chỉnh ảnh */
+        /* --- Nút bấm Đội ngũ --- */
+        .team-btn {
+            display: inline-block;
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            padding: 15px 40px;
+            font-size: 1.5em;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .team-btn:hover {
+            background: #d4af37;
+            color: #0a192f;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* --- Popup Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(10, 25, 47, 0.85); /* Nền tối mờ */
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: #0f2547;
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            max-width: 1200px;
+            width: 90%;
+            position: relative;
+            transform: translateY(50px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng nảy nhẹ */
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 25px;
+            font-size: 2em;
+            color: #a8b2d1;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-btn:hover { color: #e74c3c; }
         .img-container {
             display: flex; 
             align-items: center; 
@@ -117,38 +178,42 @@
                 <span style="background: #e74c3c; color: white; padding: 8px 20px; border-radius: 20px; font-weight: bold; margin-left: 10px;">Confidential & Proprietary</span>
             </div>
         </section>
-
-        <section class="section">
-            <h2>Đội ngũ Chuyên gia Tư vấn</h2>
-            <div class="grid-5">
-                <div class="box">
-                    <div class="box-title">Uyên Thi</div>
-                    <div class="role">Senior Research Analyst</div>
-                    <p style="font-size: 0.9em;">Phân tích tổng quan doanh nghiệp và bối cảnh ngành trang sức.</p>
-                </div>
-                <div class="box">
-                    <div class="box-title">Hồng Ngân</div>
-                    <div class="role">Senior Financial Modeler</div>
-                    <p style="font-size: 0.9em;">Đánh giá sức khỏe tài chính và mô hình hóa nhu cầu vốn.</p>
-                </div>
-                <div class="box">
-                    <div class="box-title">Xuân Phương</div>
-                    <div class="role">Head of ECM</div>
-                    <p style="font-size: 0.9em;">Thiết kế cấu trúc phát hành và quy trình huy động vốn cổ phần.</p>
-                </div>
-                <div class="box">
-                    <div class="box-title">Quỳnh Trân</div>
-                    <div class="role">Strategic Advisor</div>
-                    <p style="font-size: 0.9em;">Khai thác giá trị cộng hưởng từ các đối tác chiến lược Masan & FPT.</p>
-                </div>
-                <div class="box">
-                    <div class="box-title">Quốc Vương</div>
-                    <div class="role">Managing Director</div>
-                    <p style="font-size: 0.9em;">Tổng hợp luận điểm chiến lược và đưa ra quyết định cuối cùng.</p>
-                </div>
-            </div>
+        <section class="section" style="text-align: center;">
+            <button class="team-btn" onclick="openModal()">Đội ngũ Chuyên gia Tư vấn</button>
         </section>
 
+        <div class="modal-overlay" id="teamModal" onclick="closeModal(event)">
+            <div class="modal-content" onclick="event.stopPropagation()"> <span class="close-btn" onclick="closeModal()">&times;</span>
+                <h2 style="margin-top: 0; text-align: center; border: none;">Đội ngũ Chuyên gia Tư vấn</h2>
+                <div class="grid-5" style="margin-top: 30px;">
+                    <div class="box">
+                        <div class="box-title">Uyên Thi</div>
+                        <div class="role">Senior Research Analyst</div>
+                        <p style="font-size: 0.9em;">Phân tích tổng quan doanh nghiệp và bối cảnh ngành trang sức.</p>
+                    </div>
+                    <div class="box">
+                        <div class="box-title">Hồng Ngân</div>
+                        <div class="role">Senior Financial Modeler</div>
+                        <p style="font-size: 0.9em;">Đánh giá sức khỏe tài chính và mô hình hóa nhu cầu vốn.</p>
+                    </div>
+                    <div class="box">
+                        <div class="box-title">Xuân Phương</div>
+                        <div class="role">Head of ECM</div>
+                        <p style="font-size: 0.9em;">Thiết kế cấu trúc phát hành và quy trình huy động vốn cổ phần.</p>
+                    </div>
+                    <div class="box">
+                        <div class="box-title">Quỳnh Trân</div>
+                        <div class="role">Strategic Advisor</div>
+                        <p style="font-size: 0.9em;">Khai thác giá trị cộng hưởng từ các đối tác chiến lược Masan & FPT.</p>
+                    </div>
+                    <div class="box">
+                        <div class="box-title">Quốc Vương</div>
+                        <div class="role">Managing Director</div>
+                        <p style="font-size: 0.9em;">Tổng hợp luận điểm chiến lược và đưa ra quyết định cuối cùng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <section class="section">
             <h2>Vị thế dẫn đầu ngành Bán lẻ Trang sức</h2>
             <div class="grid-2">
@@ -338,4 +403,28 @@
                 </div>
             </div>
             
-            <div style="text-align: center; margin-
+            <div style="text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <h1 style="font-size: 2.5em; letter-spacing: 5px;">QUESTIONS?</h1>
+                <p style="color: #a8b2d1;">Email: advisory-team@hub.edu.vn | Website: pnj.com.vn</p>
+            </div>
+        </section>
+
+    </div>
+<script>
+        // Hàm mở Modal
+        function openModal() {
+            document.getElementById('teamModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Khóa cuộn trang nền khi mở popup
+        }
+
+        // Hàm đóng Modal
+        function closeModal(event) {
+            // Chỉ đóng khi click vào dấu X hoặc click ra vùng nền tối bên ngoài
+            if (!event || event.target.id === 'teamModal' || event.target.className === 'close-btn') {
+                document.getElementById('teamModal').classList.remove('active');
+                document.body.style.overflow = 'auto'; // Mở lại cuộn trang
+            }
+        }
+    </script>
+</body>
+</html>
