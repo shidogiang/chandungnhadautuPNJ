@@ -167,6 +167,38 @@
             from { opacity: 0; transform: translateY(-15px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        /* --- Dropdown Bảng Tài Chính --- */
+        .finance-trigger {
+            text-align: center;
+            border-left: none !important; /* Gỡ bỏ cái viền gạch dọc bên trái của h2 mặc định */
+            padding-left: 0 !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none; /* Tránh bôi đen chữ khi click nhầm */
+        }
+        .finance-trigger:hover {
+            color: #fff;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+        .finance-trigger::after {
+            content: " ▼"; /* Mũi tên chỉ xuống */
+            font-size: 0.6em;
+            display: inline-block;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        .finance-trigger.active::after {
+            transform: rotate(180deg); /* Xoay mũi tên lên khi mở */
+        }
+        .finance-dropdown {
+            display: none; /* Mặc định ẩn bảng */
+            width: 100%;
+            margin-top: 20px;
+        }
+        .finance-dropdown.active {
+            display: block;
+            animation: slideDownFade 0.4s ease-out forwards; /* Dùng lại hiệu ứng nảy xuống của EPS */
+        }
     </style>
 </head>
 <body>
@@ -237,29 +269,32 @@
             </div>
         </section>
 
-        <section class="section">
-            <h2>Phân tích Sức khỏe Tài chính (2023 - 2025)</h2>
-            <table class="finance-table">
-                <thead>
-                    <tr>
-                        <th>Chỉ số tài chính (Hợp nhất)</th>
-                        <th>2023</th>
-                        <th>2024</th>
-                        <th>2025</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Doanh thu thuần (Tỷ VNĐ)</td><td>33,136</td><td>37,822</td><td>34,976</td></tr>
-                    <tr><td>Biên lợi nhuận gộp (%)</td><td>18.28%</td><td>17.64%</td><td>21.97%</td></tr>
-                    <tr><td>ROE (%)</td><td>21.60%</td><td>20.06%</td><td>23.06%</td></tr>
-                    <tr><td>Tỷ lệ Nợ vay / VCSH</td><td>0.24</td><td>0.30</td><td>0.32</td></tr>
-                    <tr><td>Hàng tồn kho (Vòng quay)</td><td>2.53</td><td>2.60</td><td>1.89</td></tr>
-                </tbody>
-            </table>
-            <div style="margin-top: 25px;">
-                <p style="color: #dcb347; font-weight: bold; font-size: 1.1em; line-height: 1.5;">
-                    ⚠️ Nhận định: Áp lực vốn lưu động gia tăng khi vòng quay tồn kho chậm lại (1.89 vòng). Cần nguồn vốn dài hạn để thay thế nợ ngắn hạn.
-                </p>
+        <section class="section" style="display: flex; flex-direction: column; align-items: center;">
+            <h2 id="financeTitle" class="finance-trigger" onclick="toggleFinance()">Phân tích Sức khỏe Tài chính (2023 - 2025)</h2>
+            
+            <div id="financeContent" class="finance-dropdown">
+                <table class="finance-table">
+                    <thead>
+                        <tr>
+                            <th>Chỉ số tài chính (Hợp nhất)</th>
+                            <th>2023</th>
+                            <th>2024</th>
+                            <th>2025</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Doanh thu thuần (Tỷ VNĐ)</td><td>33,136</td><td>37,822</td><td>34,976</td></tr>
+                        <tr><td>Biên lợi nhuận gộp (%)</td><td>18.28%</td><td>17.64%</td><td>21.97%</td></tr>
+                        <tr><td>ROE (%)</td><td>21.60%</td><td>20.06%</td><td>23.06%</td></tr>
+                        <tr><td>Tỷ lệ Nợ vay / VCSH</td><td>0.24</td><td>0.30</td><td>0.32</td></tr>
+                        <tr><td>Hàng tồn kho (Vòng quay)</td><td>2.53</td><td>2.60</td><td>1.89</td></tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 25px;">
+                    <p style="color: #dcb347; font-weight: bold; font-size: 1.1em; line-height: 1.5;">
+                        ⚠️ Nhận định: Áp lực vốn lưu động gia tăng khi vòng quay tồn kho chậm lại (1.89 vòng). Cần nguồn vốn dài hạn để thay thế nợ ngắn hạn.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -433,6 +468,13 @@
         function toggleEps() {
             var formulaBox = document.getElementById('epsFormulaBox');
             formulaBox.classList.toggle('active');
+        }
+        // Hàm Ẩn/Hiện bảng Tài chính
+        function toggleFinance() {
+            var content = document.getElementById('financeContent');
+            var title = document.getElementById('financeTitle');
+            content.classList.toggle('active'); // Mở/đóng nội dung
+            title.classList.toggle('active');   // Xoay mũi tên
         }
     </script>
 </body>
